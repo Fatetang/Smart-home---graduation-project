@@ -1,0 +1,94 @@
+esphome:
+  name: sixjidianqi
+  platform: ESP8266
+  board: nodemcuv2
+  esp8266_restore_from_flash: yes  ## 是否断电记忆继电器状态;
+
+wifi:
+  ssid: "TP-LINK"     ## wifi账号;
+  password: "TANG1808494756"  ## wifi密码;
+  manual_ip:
+    static_ip: 192.168.5.146    ##固定此设备IP地址为192.168.123.156;
+    gateway: 192.168.5.1        ##路由器、网关地址;
+    subnet: 255.255.255.0         ##子网掩码;
+
+# Enable logging
+logger:                           ##输出Log；
+
+# Enable Home Assistant API
+api:
+  password: "1"  ## api密码，用于链接ha验证；
+
+ota:
+  password: "1"  ## ota密码，用于后续在线升级;
+  
+web_server:  ## web控制，添加了这2行，就可以在网页端打开设备ip;
+  port: 80
+
+output:
+  - platform: gpio
+    pin: D0
+    id: 'generic_out'
+    
+  - platform: gpio
+    pin: D1
+    id: 'generic_out1'
+    
+  - platform: gpio
+    pin: D2
+    id: 'generic_out2'
+    
+  - platform: gpio
+    pin: D3
+    id: 'generic_out3'
+    
+  - platform: gpio
+    pin: D5
+    id: 'generic_out4'
+
+  - platform: gpio
+    pin: D6
+    id: 'generic_out5'
+
+  - platform: gpio
+    pin: D7
+    id: 'generic_out6'
+
+  - platform: gpio
+    pin: D8
+    id: 'generic_out7'
+    
+light:
+  - platform: binary
+    name: "继电器1"
+    output: 'generic_out'
+    
+  - platform: binary
+    name: "继电器2"
+    output: 'generic_out1'
+
+  - platform: binary
+    name: "继电器3"
+    output: 'generic_out2'
+    
+  - platform: binary
+    name: "继电器4"
+    output: 'generic_out3'
+
+  - platform: binary
+    name: "继电器5"
+    output: 'generic_out4'
+    
+  - platform: binary
+    name: "继电器6"
+    output: 'generic_out5'
+    
+  - platform: binary
+    name: "继电器7"
+    output: 'generic_out6'
+    
+  - platform: binary
+    name: "继电器8"
+    output: 'generic_out7'
+        
+    

@@ -1,0 +1,49 @@
+esphome:
+  name: rgb_light     ##这里的名称一定要与新建此模块的名称一致
+  platform: ESP8266   ##不能更改
+  board: esp01_1m     ##不能更改
+  esp8266_restore_from_flash: yes  ## 是否断电记忆继电器状态;
+  
+wifi:
+  ssid: "TP-LINK"     ## 你家的2.4G wifi账号
+  password: "TANG1808494756"  ## 你家的2.4G wifi密码
+  manual_ip:
+    static_ip: 192.168.5.135    ##IP 自己设定
+    gateway: 192.168.5.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "1"
+
+ota:
+  password: "1"
+
+web_server:  ## 这个是web控制，添加了这2行，就可以打开设备ip，有页面
+  port: 80
+
+switch:
+  - platform: gpio            ## 不能更改
+    name: "Water pump relay"  ## 名称可以自定义
+    pin: GPIO0                ## 使用GPIO-0
+    id: relay                 ## 不能更改
+    inverted: yes             ## 翻转输出，即低电平触发
+
+light:
+  - platform: fastled_clockless     ##不能更改
+    chipset: WS2812B                 ##不能更改
+    pin: GPIO2                      ##我用的是GPIO-2
+    num_leds: 9                     ##你买的WS2812B 灯珠数目，根据实际情况填写
+    rgb_order: BRG
+    name: "Bedroom RGB_light"       ##名称自定义
+    effects:
+      - addressable_rainbow:        ##自带了7种特效
+      - addressable_color_wipe:
+      - addressable_scan:
+      - addressable_twinkle:
+      - addressable_random_twinkle:
+      - addressable_fireworks:
+      - addressable_flicker:

@@ -1,0 +1,34 @@
+esphome:
+  name:  masterbedroom       ##这里的名称一定要与你建立这个模块时的名称相同;
+  platform: ESP8266   ##这里不能变;
+  board: esp01_1m     ##这里不能变;
+  esp8266_restore_from_flash: yes  ## 是否断电记忆继电器状态;
+
+wifi:
+  ssid: "TP-LINK"     ## wifi账号;
+  password: "TANG1808494756"  ## wifi密码;
+  manual_ip:
+    static_ip: 192.168.5.131    ##固定此设备IP地址为192.168.123.156;
+    gateway: 192.168.5.1        ##路由器、网关地址;
+    subnet: 255.255.255.0         ##子网掩码;
+
+# Enable logging
+logger:                           ##输出Log；
+
+# Enable Home Assistant API
+api:
+  password: "1"  ## api密码，用于链接ha验证；
+
+ota:
+  password: "1"  ## ota密码，用于后续在线升级;
+  
+web_server:  ## web控制，添加了这2行，就可以在网页端打开设备ip;
+  port: 80
+
+
+switch:                           ##设备类型;
+  - platform: gpio                ##平台;
+    name: "test switch relay"      ##自定义名称，最好起关联的名称;
+    pin: GPIO0                    ##ESP01/01S 是GPIO0脚;
+    id: relay                     ##ID 为继电器开关;
+    inverted: yes                 ## inverted 参数，表示低电平有效，即继电器是低电平触发;

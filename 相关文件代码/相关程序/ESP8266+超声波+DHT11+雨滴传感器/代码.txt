@@ -1,0 +1,63 @@
+esphome:
+  name: jidianqi
+  platform: ESP8266
+  board: nodemcuv2
+  esp8266_restore_from_flash: yes  ## 是否断电记忆继电器状态;
+
+wifi:
+  ssid: "TP-LINK"     ## 你家的2.4G wifi账号
+  password: "TANG1808494756"  ## 你家的2.4G wifi密码
+  manual_ip:
+    static_ip: 192.168.5.141    ##IP 自己设定
+    gateway: 192.168.5.1
+    subnet: 255.255.255.0
+
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "1"
+
+ota:
+  password: "1"
+  
+web_server:  ## web控制，添加了这2行，就可以在网页端打开设备ip;
+  port: 80
+
+
+i2c:
+  sda: 4
+  scl: 5
+  scan: True
+  
+sensor:   
+  - platform: ultrasonic
+    trigger_pin: D7
+    echo_pin: D6
+    name: "sr04"
+    update_interval: 1s
+    
+    
+  - platform: dht
+    pin: D5
+    temperature:
+      name: "tem"
+    humidity:
+      name: "hum"
+    update_interval: 1s
+    model: DHT11
+
+    
+    
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D3
+      mode: INPUT_PULLUP
+    id: water
+    name: "yudi"
+
+  - platform: status
+    name: "连接状态"
